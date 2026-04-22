@@ -1,4 +1,4 @@
-🧠 Smart Prescription Reader 
+#🧠 Smart Prescription Reader 
 
  📌 Overview
 
