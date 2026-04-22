@@ -25,16 +25,13 @@ The goal of this project is to simplify medical prescription understanding by co
 * 📊 Clean and structured output display
 * 📥 Download extracted data as JSON
 
- 🧩 Project Structure
+🧩 Project Structure
 
-MINI_PROJ_NO_API/
-│
-├── index.html        # Main UI for upload and analysis
-├── app.js            # Core logic + AI integration
-├── style.css         # Styling and UI design
-├── results.html      # Results display page
-├── results.js        # Handles result rendering
-└── images/           # Sample images 
+1. index.html – Main user interface for uploading and analyzing prescriptions
+2. app.js – Core logic and AI integration using Gemini API
+3. style.css – Styling and UI design
+4. results.html – Displays the extracted prescription data
+5. results.js – Handles rendering of analysis results
 
 🛠️ Technologies Used
 
