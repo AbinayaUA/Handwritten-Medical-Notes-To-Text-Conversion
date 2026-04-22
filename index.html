@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Prescription Reader | Upload → Read → Simplify</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i data-lucide="stethoscope" class="icon-primary"></i>
+                <h1>Smart Prescription Reader</h1>
+            </div>
+            <p class="subtitle">Upload → Read → Simplify</p>
+            <div class="header-action">
+                <button id="analyze-btn" class="btn-primary" disabled>
+                    <i data-lucide="sparkles"></i>
+                    Analyze Prescription
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content-layout">
+            <!-- Left Side: Upload & Input -->
+            <div class="input-side">
+                <section class="upload-section">
+                    <div id="dropzone" class="dropzone">
+                        <input type="file" id="file-input" accept=".jpg,.jpeg,.png,.pdf" hidden>
+                        <div class="dropzone-content">
+                            <div class="icon-group">
+                                <i data-lucide="image" class="icon-lg"></i>
+                                <i data-lucide="file-text" class="icon-lg"></i>
+                            </div>
+                            <h3>Drag & Drop prescription</h3>
+                            <p>Accepts JPG, PNG, or PDF</p>
+                            <button type="button" class="btn-secondary" onclick="document.getElementById('file-input').click()">
+                                Browse Files
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="preview-container" class="preview-container hidden">
+                        <h3>Prescription Preview</h3>
+                        <div class="preview-card">
+                            <div id="file-preview"></div>
+                            <button id="remove-file" class="btn-icon">
+                                <i data-lucide="x"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Loading & Debug State -->
+                <section id="loading-state" class="loading-state hidden">
+                    <div class="spinner"></div>
+                    <p id="loading-text">🔍 Analyzing handwriting...</p>
+                    <div id="status-log" class="status-log"></div>
+                </section>
+            </div>
+
+            <!-- Right Side: Decoded Results -->
+            <div class="output-side">
+                <section id="result-section" class="result-section hidden">
+                    <div class="result-header">
+                        <h2><i data-lucide="check-circle" class="icon-success"></i> Decoded!</h2>
+                        <div class="action-buttons">
+                            <button id="download-json" class="btn-small">
+                                <i data-lucide="download" class="icon-xs"></i> JSON
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <label><i data-lucide="user"></i> Patient</label>
+                            <p id="output-patient" class="data-value">-</p>
+                        </div>
+                        <div class="result-card">
+                            <label><i data-lucide="user-plus"></i> Doctor</label>
+                            <p id="output-doctor" class="data-value">-</p>
+                        </div>
+                        <div class="result-card">
+                            <label><i data-lucide="calendar"></i> Date</label>
+                            <p id="output-date" class="data-value">-</p>
+                        </div>
+                        <div class="result-card wide">
+                            <label><i data-lucide="pill"></i> Medicines</label>
+                            <div id="medicine-tags" class="medicine-tags"></div>
+                        </div>
+                        <div class="result-card wide">
+                            <label><i data-lucide="info"></i> Instructions</label>
+                            <p id="output-instructions" class="data-value">-</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Placeholder when no results -->
+                <div id="no-results" class="no-results-placeholder">
+                    <i data-lucide="clipboard-list"></i>
+                    <p>Analysis results will appear here after scanning.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Hardened Debug Console -->
+        <div class="debug-container">
+            <div class="debug-header" onclick="document.getElementById('debug-content').classList.toggle('hidden')">
+                <span><i data-lucide="terminal"></i> Debug Console</span>
+                <i data-lucide="chevron-up"></i>
+            </div>
+            <div id="debug-content" class="debug-content hidden">
+                <div id="debug-logs"></div>
+                <div class="debug-actions">
+                    <button id="discover-models-btn" class="btn-xs">🔍 Discover Models</button>
+                    <button onclick="copyLogs()" class="btn-xs">📋 Copy Logs</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Powered by Gemini 1.5 Flash • Secure & Lightweight</p>
+        </footer>
+    </div>
+
+    <!-- SDK and Logic -->
+    <script type="module" src="app.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Debug Copy Helper
+        window.copyLogs = () => {
+            const logs = document.getElementById('debug-logs').innerText;
+            navigator.clipboard.writeText(logs);
+            alert('Logs copied to clipboard!');
+        };
+    </script>
+</body>
+</html>

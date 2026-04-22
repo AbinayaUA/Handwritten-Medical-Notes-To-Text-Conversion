@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription Decoded | Smart Prescription Reader</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <i data-lucide="stethoscope" class="icon-primary"></i>
+                <h1>Smart Prescription Reader</h1>
+            </div>
+            <p class="subtitle">Decoded Results</p>
+        </header>
+
+        <main>
+            <section id="result-page-section" class="result-section">
+                <div class="result-header">
+                    <h2><i data-lucide="check-circle" class="icon-success"></i> Prescription Decoded!</h2>
+                    <div class="action-buttons">
+                        <button id="copy-json" class="btn-small">
+                            <i data-lucide="copy" class="icon-xs"></i> Copy JSON
+                        </button>
+                        <button id="download-json" class="btn-small">
+                            <i data-lucide="download" class="icon-xs"></i> Download
+                        </button>
+                    </div>
+                </div>
+
+                <div class="result-grid">
+                    <!-- Patient card -->
+                    <div class="result-card patient-card">
+                        <label><i data-lucide="user"></i> Patient Name</label>
+                        <p id="output-patient" class="data-value">Loading...</p>
+                    </div>
+
+                    <!-- Doctor card -->
+                    <div class="result-card doctor-card">
+                        <label><i data-lucide="user-plus"></i> Doctor Name</label>
+                        <p id="output-doctor" class="data-value">Loading...</p>
+                    </div>
+
+                    <!-- Date card -->
+                    <div class="result-card date-card">
+                        <label><i data-lucide="calendar"></i> Date</label>
+                        <p id="output-date" class="data-value">Loading...</p>
+                    </div>
+
+                    <!-- Medicines Section -->
+                    <div class="result-card medicines-card wide">
+                        <label><i data-lucide="pill"></i> Prescribed Medicines</label>
+                        <div id="medicine-tags" class="medicine-tags">
+                            <!-- Tags will be injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Instructions card -->
+                    <div class="result-card instructions-card wide">
+                        <label><i data-lucide="info"></i> Instructions & Notes</label>
+                        <p id="output-instructions" class="data-value">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="footer-actions" style="margin-top: 2.5rem; text-align: center;">
+                    <a href="index.html" class="btn-secondary">
+                        <i data-lucide="arrow-left"></i> Analyze Another Prescription
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Powered by Gemini 1.5 Flash • Secure & Lightweight</p>
+        </footer>
+    </div>
+
+    <script src="results.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
